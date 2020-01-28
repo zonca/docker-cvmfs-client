@@ -14,7 +14,7 @@ RUN yum -y install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-
     yum clean all && \
     rm -rf /var/cache/yum/*
 
-ADD cvmfs_default.local /etc/cvmfs/default.local
+COPY cvmfs_default.local /etc/cvmfs/default.local
 
 # No need to have autofs process running, we mount manually
 
