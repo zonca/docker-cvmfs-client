@@ -6,4 +6,4 @@
 
 ## Available containers
 
-* `cvmfs-client`: cvmfs client preconfigured for CDMS
+* `cvmfs-client`: cvmfs client preconfigured for CDMS, available as [zonca/cvmfs-client](https://hub.docker.com/repository/docker/zonca/cvmfs-client) on DockerHub
