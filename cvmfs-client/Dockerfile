@@ -18,4 +18,8 @@ COPY cvmfs_default.local /etc/cvmfs/default.local
 
 # No need to have autofs process running, we mount manually
 
-ENTRYPOINT mkdir -p /cvmfs/config-osg.opensciencegrid.org && mount -t cvmfs config-osg.opensciencegrid.org /cvmfs/config-osg.opensciencegrid.org && mkdir -p /cvmfs/cdms.opensciencegrid.org && mount -t cvmfs cdms.opensciencegrid.org /cvmfs/cdms.opensciencegrid.org && sleep infinity
+ENTRYPOINT mkdir -p /cvmfs/config-osg.opensciencegrid.org && \
+	mount -t cvmfs config-osg.opensciencegrid.org /cvmfs/config-osg.opensciencegrid.org && \
+	mkdir -p /cvmfs/cdms.opensciencegrid.org && \
+	mount -t cvmfs cdms.opensciencegrid.org /cvmfs/cdms.opensciencegrid.org && \
+	sleep infinity
