@@ -20,6 +20,8 @@ COPY cvmfs_default.local /etc/cvmfs/default.local
 
 ENTRYPOINT mkdir -p /cvmfs/config-osg.opensciencegrid.org && \
 	mount -t cvmfs config-osg.opensciencegrid.org /cvmfs/config-osg.opensciencegrid.org && \
-	mkdir -p /cvmfs/cdms.opensciencegrid.org && \
+	mkdir /cvmfs/cdms.opensciencegrid.org && \
 	mount -t cvmfs cdms.opensciencegrid.org /cvmfs/cdms.opensciencegrid.org && \
+	mkdir /cvmfs/sft.cern.ch && \
+	mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch && \
 	sleep infinity
