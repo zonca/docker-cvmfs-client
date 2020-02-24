@@ -35,11 +35,14 @@ fi
 # by SHARED_DIRECTORY.
 
 # Check if the SHARED_DIRECTORY_2 variable is empty
-if [ ! -z "${SHARED_DIRECTORY_2}" ]; then
+i=6
+for DIR in 'config-osg.opensciencegrid.org' 'cdms.opensciencegrid.org' 'sft.cern.ch' 'geant4.cern.ch'
+do
   echo "Writing SHARED_DIRECTORY_2 to /etc/exports file"
-  echo "{{SHARED_DIRECTORY_2}} {{PERMITTED}}({{READ_ONLY}},{{SYNC}},no_subtree_check,no_auth_nlm,insecure,no_root_squash)" >> /etc/exports
-  /bin/sed -i "s@{{SHARED_DIRECTORY_2}}@${SHARED_DIRECTORY_2}@g" /etc/exports
-fi
+  echo "/cvmfs/{{DIR}} {{PERMITTED}}({{READ_ONLY}},{{SYNC}},no_subtree_check,no_auth_nlm,insecure,no_root_squash,fsid=$i)" >> /etc/exports
+  /bin/sed -i "s@{{DIR}}@${DIR}@g" /etc/exports
+  ((i+=1))
+done
 
 # Check if the PERMITTED variable is empty
 if [ -z "${PERMITTED}" ]; then

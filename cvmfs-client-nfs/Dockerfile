@@ -17,6 +17,11 @@ EXPOSE 111/udp 2049/tcp
 COPY nfsd.sh /usr/bin/nfsd.sh
 RUN chmod +x /usr/bin/nfsd.sh
 
+RUN mkdir -p /cvmfs/config-osg.opensciencegrid.org && \
+    mkdir -p /cvmfs/cdms.opensciencegrid.org && \
+    mkdir -p /cvmfs/sft.cern.ch && \
+    mkdir -p /cvmfs/geant4.cern.ch
+
 ENTRYPOINT mount -t cvmfs config-osg.opensciencegrid.org /cvmfs/config-osg.opensciencegrid.org && \
            mount -t cvmfs cdms.opensciencegrid.org /cvmfs/cdms.opensciencegrid.org && \
            mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch && \
