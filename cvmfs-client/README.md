@@ -2,4 +2,4 @@
 
 * CentOS 7
 * Installs `osg-oasis` to provide the CVMFS client
-* Manually mounts the CDMS files to `/cvmfs/cdms.opensciencegrid.org`
+* Manually mounts the repositories defined in `CVMFS_REPOSITORIES`

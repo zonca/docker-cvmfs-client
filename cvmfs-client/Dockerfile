@@ -18,12 +18,5 @@ COPY cvmfs_default.local /etc/cvmfs/default.local
 
 # No need to have autofs process running, we mount manually
 
-ENTRYPOINT mkdir -p /cvmfs/config-osg.opensciencegrid.org && \
-	mount -t cvmfs config-osg.opensciencegrid.org /cvmfs/config-osg.opensciencegrid.org && \
-	mkdir /cvmfs/cdms.opensciencegrid.org && \
-	mount -t cvmfs cdms.opensciencegrid.org /cvmfs/cdms.opensciencegrid.org && \
-	mkdir /cvmfs/sft.cern.ch && \
-	mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch && \
-	mkdir /cvmfs/geant4.cern.ch && \
-	mount -t cvmfs geant4.cern.ch /cvmfs/geant4.cern.ch && \
+ENTRYPOINT for DIR in $CVMFS_REPOSITORIES; do mkdir -p /cvmfs/$DIR && mount -t cvmfs $DIR /cvmfs/$DIR; done && \
 	sleep infinity
