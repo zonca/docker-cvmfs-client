@@ -39,7 +39,7 @@ i=6
 for DIR in 'config-osg.opensciencegrid.org' 'cdms.opensciencegrid.org' 'sft.cern.ch' 'geant4.cern.ch'
 do
   echo "Writing SHARED_DIRECTORY_2 to /etc/exports file"
-  echo "/cvmfs/{{DIR}} {{PERMITTED}}({{READ_ONLY}},{{SYNC}},no_subtree_check,no_auth_nlm,insecure,no_root_squash,fsid=$i)" >> /etc/exports
+  echo "/cvmfs/{{DIR}} {{PERMITTED}}({{READ_ONLY}},{{SYNC}},no_subtree_check,no_root_squash,fsid=$i)" >> /etc/exports
   /bin/sed -i "s@{{DIR}}@${DIR}@g" /etc/exports
   ((i+=1))
 done
@@ -76,6 +76,10 @@ else
   echo "Writes will be immediately written to disk."
   /bin/sed -i "s/{{SYNC}}/sync/g" /etc/exports
 fi
+
+echo 'LOCKD_TCPPORT=32803' >> /etc/sysconfig/nfs
+echo 'LOCKD_UDPPORT=32769' >> /etc/sysconfig/nfs
+echo 'MOUNTD_PORT=892' >> /etc/sysconfig/nfs
 
 # Partially set 'unofficial Bash Strict Mode' as described here: http://redsymbol.net/articles/unofficial-bash-strict-mode/
 # We don't set -e because the pidof command returns an exit code of 1 when the specified process is not found

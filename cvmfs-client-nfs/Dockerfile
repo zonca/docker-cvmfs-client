@@ -12,7 +12,7 @@ RUN \
     echo "rpc_pipefs    /var/lib/nfs/rpc_pipefs rpc_pipefs      defaults        0       0" >> /etc/fstab && \
     echo "nfsd  /proc/fs/nfsd   nfsd    defaults        0       0" >> /etc/fstab
 
-EXPOSE 111/udp 2049/tcp
+EXPOSE 111/udp 2049/tcp 111/tcp 32803/tcp 32769/udp 892/udp 892/tcp
 
 COPY nfsd.sh /usr/bin/nfsd.sh
 RUN chmod +x /usr/bin/nfsd.sh
