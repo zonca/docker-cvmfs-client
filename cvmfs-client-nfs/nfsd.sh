@@ -20,7 +20,7 @@ stop()
   exit
 }
 
-# Check if the SHARED_DIRECTORY variable is empty
+SHARED_DIRECTORY=/cvmfs
 if [ -z "${SHARED_DIRECTORY}" ]; then
   echo "The SHARED_DIRECTORY environment variable is unset or null, exiting..."
   exit 1
@@ -29,16 +29,11 @@ else
   /bin/sed -i "s@{{SHARED_DIRECTORY}}@${SHARED_DIRECTORY}@g" /etc/exports
 fi
 
-# This is here to demonsrate how multiple directories can be shared. You
-# would need a block like this for each extra share.
-# Any additional shares MUST be subdirectories of the root directory specified
-# by SHARED_DIRECTORY.
-
-# Check if the SHARED_DIRECTORY_2 variable is empty
-i=6
-for DIR in 'config-osg.opensciencegrid.org' 'cdms.opensciencegrid.org' 'sft.cern.ch' 'geant4.cern.ch'
+i=1
+for DIR in ${CVMFS_REPOSITORIES}
 do
-  echo "Writing SHARED_DIRECTORY_2 to /etc/exports file"
+  mkdir -p /cvmfs/$DIR
+  mount -t cvmfs $DIR /cvmfs/$DIR
   echo "/cvmfs/{{DIR}} {{PERMITTED}}({{READ_ONLY}},{{SYNC}},no_subtree_check,no_root_squash,fsid=$i)" >> /etc/exports
   /bin/sed -i "s@{{DIR}}@${DIR}@g" /etc/exports
   ((i+=1))
@@ -76,10 +71,6 @@ else
   echo "Writes will be immediately written to disk."
   /bin/sed -i "s/{{SYNC}}/sync/g" /etc/exports
 fi
-
-echo 'LOCKD_TCPPORT=32803' >> /etc/sysconfig/nfs
-echo 'LOCKD_UDPPORT=32769' >> /etc/sysconfig/nfs
-echo 'MOUNTD_PORT=892' >> /etc/sysconfig/nfs
 
 # Partially set 'unofficial Bash Strict Mode' as described here: http://redsymbol.net/articles/unofficial-bash-strict-mode/
 # We don't set -e because the pidof command returns an exit code of 1 when the specified process is not found
