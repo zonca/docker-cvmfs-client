@@ -21,13 +21,8 @@ stop()
 }
 
 SHARED_DIRECTORY=/cvmfs
-if [ -z "${SHARED_DIRECTORY}" ]; then
-  echo "The SHARED_DIRECTORY environment variable is unset or null, exiting..."
-  exit 1
-else
-  echo "Writing SHARED_DIRECTORY to /etc/exports file"
-  /bin/sed -i "s@{{SHARED_DIRECTORY}}@${SHARED_DIRECTORY}@g" /etc/exports
-fi
+echo "Writing SHARED_DIRECTORY to /etc/exports file"
+/bin/sed -i "s@{{SHARED_DIRECTORY}}@${SHARED_DIRECTORY}@g" /etc/exports
 
 i=1
 for DIR in ${CVMFS_REPOSITORIES}
