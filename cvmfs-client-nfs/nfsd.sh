@@ -67,7 +67,7 @@ else
   /bin/sed -i "s/{{SYNC}}/sync/g" /etc/exports
 fi
 
-# Launch SSHd in background - daemon mode
+echo "Launch SSHd in background - daemon mode"
 /usr/sbin/sshd
 
 # Partially set 'unofficial Bash Strict Mode' as described here: http://redsymbol.net/articles/unofficial-bash-strict-mode/
