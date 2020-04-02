@@ -18,6 +18,7 @@ COPY exports /etc/
 COPY nfsd.sh /usr/bin/nfsd.sh
 RUN chmod +x /usr/bin/nfsd.sh
 
+EXPOSE 22
 
 ENTRYPOINT /usr/bin/nfsd.sh
 
