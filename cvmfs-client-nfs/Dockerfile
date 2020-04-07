@@ -3,7 +3,7 @@ FROM zonca/cvmfs-client:latest
 COPY cvmfs_default.local /etc/cvmfs/default.local
 
 RUN \
-    yum -y --setopt=tsflags=nodocs install nfs-utils openssh-server openssh-clients && \
+    yum -y --setopt=tsflags=nodocs install nfs-utils openssh-server openssh-clients rsync && \
     mkdir -p /exports && \
     yum clean all
 
