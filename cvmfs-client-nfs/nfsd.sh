@@ -34,6 +34,8 @@ do
   ((i+=1))
 done
 
+echo "/cvmfs/data *(rw,sync,no_subtree_check,no_root_squash,fsid=$i)" >> /etc/exports
+
 # Check if the PERMITTED variable is empty
 if [ -z "${PERMITTED}" ]; then
   echo "The PERMITTED environment variable is unset or null, defaulting to '*'."
