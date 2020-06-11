@@ -20,6 +20,12 @@ COPY exports /etc/
 COPY nfsd.sh /usr/bin/nfsd.sh
 RUN chmod +x /usr/bin/nfsd.sh
 
+# Allow login with CDMS private SSH key
+
+RUN mkdir /root/.ssh && chmod 700 /root/.ssh
+COPY authorized_keys /root/.ssh/
+RUN chmod 600 /root/.ssh/authorized_keys
+
 EXPOSE 22
 
 ENTRYPOINT /usr/bin/nfsd.sh
