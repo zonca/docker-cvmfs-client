@@ -7,12 +7,19 @@ RUN yum -y install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el7-release-
                    epel-release \
                    yum-plugin-priorities && \
     yum -y install  \
+                   unzip \
                    osg-oasis \
 		cvmfs-config-default \
                    redhat-lsb-core \
                    singularity && \
     yum clean all && \
-    rm -rf /var/cache/yum/*
+    rm -rf /var/cache/yum/* && \
+    curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip && \
+    unzip rclone-current-linux-amd64.zip && \
+    cd rclone-*-linux-amd64 && \
+    cp rclone /usr/bin/ && \
+    chmod 755 /usr/bin/rclone
+
 
 COPY cvmfs_default.local /etc/cvmfs/default.local
 
